@@ -1,0 +1,82 @@
+<!DOCTYPE HTML> 
+<html>
+    <head>
+        <title>LibrApp</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <style>
+            .button1 {
+              position:sticky;  
+              border: 2px solid #003ce2;
+              background-color: #ffffff;
+              border-radius: 20px;
+              color:#003ce2;
+              padding: 1.5% 4%;
+              text-align: center;
+              font-size: 20px;
+              cursor: pointer;
+              transition-duration: 0.5s;
+              position:absolute;
+              font-family: Arial, Helvetica, sans-serif;
+              text-decoration:none;
+            }
+            .button1:hover {
+                color:white;
+                background-color: #003ce2;
+            }
+            .h1 {
+                Text-align:center;
+                color: #003ce2;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 40px;
+            }
+            .h2 {
+                color:#003ce2;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 30px;
+                display:inline-block;
+                position: absolute;
+            }
+        </style>
+        <h1 class="h1">Nová kniha</h1>
+        </br> </br> </br> </br>
+        <h2 class="h2" style="float:left; left:17.5%">Název knihy</h2>
+        <h2 class="h2" style="float:left;  right:35%">Rok vydání</h2>
+        <h2 class="h2" style="float:right; right:25%">Žánr</h2>
+        </br>
+        <input id="nazev" type="text" style="width:40%; position:absolute; left:5%; top:40%;  font-size:18px">
+        <input id="rok" type="number" min="0" max="2100" step="1" value="2016" style="position:absolute; top:40%; left:55%;  font-size:18px" >
+        <select id="zanr" style="position:absolute; top:40%; right:24%; font-size:18px">
+            <option value="drama">Drama</option>
+            <option value="roman">Román</option>
+            <option value="novela">Novela</option>
+            <option value="poezie">Poezie</option>
+            <option value="proza">Próza</option>
+        </select>
+        <button style="position:absolute; top:35%; right:5%" class="button1" onclick="nacteni()">Zaevidovat</button>
+        <script>
+           function nacteni() {
+               var nazev = document.getElementById("nazev").value;
+               var rok = Number(document.getElementById("rok").value);
+               var zanr = document.getElementById("zanr").value;
+               if (nazev == "") {
+                document.getElementById("odst").innerHTML = "Tuto knihu nelze zaevidovat - nevyplněná pole.";
+               } else {
+                document.getElementById("odst").innerHTML = nazev + "    " + rok + "    " + zanr + " zaevidovano";
+                // Zde zapsat zaslani dat o knize do databaze
+               }
+               
+               
+
+            }
+        </script>
+        <p id="odst" style="position:absolute; top:50%; left:20%; font-family: Arial, Helvetica, sans-serif;"></p>
+
+
+
+
+        
+    </body>
+</html>
