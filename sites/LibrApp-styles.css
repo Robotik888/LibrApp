@@ -1,0 +1,68 @@
+
+.buttonMain {
+    position:sticky;  
+    background-color: #003ce2;
+    border: 2px solid #003ce2;
+    border-radius: 20px;
+    color:#ffffff;
+    padding: 1.5% 4%;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+    transition-duration: 0.6s;
+    position:absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration:none;
+  }
+  .buttonMain:hover {
+      color:#003ce2;
+      background-color: #ffffff;
+  }
+  .h1Main {
+      Text-align:center;
+      color: #003ce2;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 60px;
+  }
+
+  .buttonElse {
+    border: 2px solid #003ce2;
+    background-color: #ffffff;
+    border-radius: 20px;
+    color:#003ce2;
+    padding: 1.5% 4%;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    position:absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration:none;
+  }
+  .buttonElse:hover {
+      color:white;
+      background-color: #003ce2;
+  }
+  .h1Else {
+      Text-align:center;
+      color: #003ce2;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 40px;
+
+  }
+  .h2Else {
+      color:#003ce2;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      display:inline-block;
+      position: absolute;
+  }
+  .p {
+    position:absolute; 
+    top:50%; left:20%; 
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+
+  

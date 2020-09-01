@@ -3,48 +3,17 @@
     <head>
         <title>LibrApp</title>
         <meta charset="UTF-8">
+        <script src="LibrApp-js.js"></script>
+        <link rel="stylesheet" href="LibrApp-styles.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <style>
-            .button1 {
-              border: 2px solid #003ce2;
-              background-color: #ffffff;
-              border-radius: 20px;
-              color:#003ce2;
-              padding: 1.5% 4%;
-              text-align: center;
-              font-size: 20px;
-              cursor: pointer;
-              transition-duration: 0.5s;
-              position:absolute;
-              font-family: Arial, Helvetica, sans-serif;
-              text-decoration:none;
-            }
-            .button1:hover {
-                color:white;
-                background-color: #003ce2;
-            }
-            .h1 {
-                Text-align:center;
-                color: #003ce2;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 40px;
-            }
-            .h2 {
-                color:#003ce2;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 30px;
-                display:inline-block;
-                position: absolute;
-            }
-        </style>
-        <h1 class="h1">Nová výpůjčka</h1>
+        <h1 class="h1Else">Nová výpůjčka</h1>
         </br>
-        <h2 class="h2" style="left:43%">Název knihy</h2>
-        <h2 class="h2" style="left:2%; top:39%">Jméno a příjmení</h2>
-        <h2 class="h2" style="right:63%; top:39%">Do kdy</h2>
-        <h2 class="h2" style="right:20%; top:39%">Předpokládané datum vrácení</h2>
+        <h2 class="h2Else" style="left:43%">Název knihy</h2>
+        <h2 class="h2Else" style="left:2%; top:39%">Jméno a příjmení</h2>
+        <h2 class="h2Else" style="right:63%; top:39%">Do kdy</h2>
+        <h2 class="h2Else" style="right:20%; top:39%">Předpokládané datum vrácení</h2>
         </br>
 
         <input id="nazev" type="text" style="width:40%; position:absolute; left:30%; top:30%;  font-size:18px">
@@ -52,31 +21,9 @@
         <input id="dokdy" type="date" style="position:absolute; top:50%; right:60%;  font-size:18px" >
         <input id="datumvraceni" type="date" style="position:absolute; top:50%; right:30%; font-size:18px">
 
-        <button style="position:absolute; top:43%; right:3%" class="button1" onclick="nacteni()">Vypůjčit</button>
-        <script>
-           function nacteni() {
-               var nazev = document.getElementById("nazev").value;
-               var jmeno = document.getElementById("jmeno").value;
-               var dokdy = document.getElementById("dokdy").value;
-               var datumvraceni = document.getElementById("datumvraceni").value;
-               if (jmeno == "" || dokdy == "" || datumvraceni == "" || nazev == "") {
-                document.getElementById("odst").innerHTML = "Výpůjčku nelze provést - nevyplněná pole.";
-               } else {
-                var datumek = new Date().toLocaleDateString();
-                document.getElementById("odst").innerHTML = datumek + " výpůjčka " + nazev + " pro " + jmeno + " vypůjčeno do " + dokdy + " předpokládané vrácení " + datumvraceni;
-                // Zde zapsat zaslani dat o vypujcce do databaze
-               }
-               
-               
-
-            }
-        </script>
+        <button style="position:absolute; top:43%; right:3%" class="buttonElse" onclick="nacteni()">Vypůjčit</button>
         <p id="odst" style="position:absolute; top:60%; left:20%; font-family: Arial, Helvetica, sans-serif;"></p>
-        <a href="main.html" class="button1" style="left:40%; top:80%"><Strong>Hlavní stánka</Strong></a>
-
-
-
-
-        
+        <a href="main.html" class="buttonElse" style="left:40%; top:80%"><Strong>Hlavní stánka</Strong></a>
+ 
     </body>
 </html>
