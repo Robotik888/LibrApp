@@ -1,28 +1,28 @@
-function nacteni() {
-    var nazev = document.getElementById("nazev").value;
-    var rok = Number(document.getElementById("rok").value);
-    var zanr = document.getElementById("zanr").value;
-    if (nazev == "") {
-     document.getElementById("odst").innerHTML = "Tuto knihu nelze zaevidovat - nevyplněná pole.";
+function newBook() {
+    var title = document.getElementById("titleInput").value;
+    var publicationYear = Number(document.getElementById("publicationYearInput").value);
+    var genre = document.getElementById("genreInput").value;
+    if (title == "") {
+     document.getElementById("paragraph").innerHTML = "Tuto knihu nelze zaevidovat - nevyplněná pole.";
     } else {
-     document.getElementById("odst").innerHTML = nazev + "    " + rok + "    " + zanr + " zaevidovano";
-     // Zde zapsat zaslani dat o knize do databaze
+     document.getElementById("paragraph").innerHTML = title + "    " + publicationYear + "    " + genre + " zaevidovano";
+     // here will be code for giving information about new book to database
     }
  }
- function nacteni() {
-    var nazev = document.getElementById("nazev").value;
-    var jmeno = document.getElementById("jmeno").value;
-    var dokdy = document.getElementById("dokdy").value;
-    var datumvraceni = document.getElementById("datumvraceni").value;
-    if (jmeno == "" || dokdy == "" || datumvraceni == "" || nazev == "") {
-     document.getElementById("odst").innerHTML = "Výpůjčku nelze provést - nevyplněná pole.";
+ function borrow() {
+    var title = document.getElementById("titleInput").value;
+    var name = document.getElementById("nameInput").value;
+    var returnDate = document.getElementById("returnDateInput").value;
+    var assumedReturnDate = document.getElementById("assumedReturnDateInput").value;
+    if (name == "" || returnDate == "" || assumedReturnDate == "" || title == "") {
+     document.getElementById("paragraph").innerHTML = "Výpůjčku nelze provést - nevyplněná pole.";
     } else {
-     var datumek = new Date().toLocaleDateString();
-     document.getElementById("odst").innerHTML = datumek + " výpůjčka " + nazev + " pro " + jmeno + " vypůjčeno do " + dokdy + " předpokládané vrácení " + datumvraceni;
-     // Zde zapsat zaslani dat o vypujcce do databaze
+     var todayDate = new Date().toLocaleDateString();
+     document.getElementById("paragraph").innerHTML = todayDate + " výpůjčka " + title + " pro " + name + " vypůjčeno do " + returnDate + " předpokládané vrácení " + assumedReturnDate;
+     // here will be code for giving information about new borrow to database
     }
 }
 function dateFce() {
-    var datumik = new Date().toLocaleDateString();
-    document.getElementById("dnesnidatum").innerHTML = datumik;
+    var todayDate = new Date().toLocaleDateString();
+    document.getElementById("todayDate").innerHTML = todayDate;
     }

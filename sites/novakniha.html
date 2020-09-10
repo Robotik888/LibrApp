@@ -8,29 +8,23 @@
         <script src="LibrApp-js.js"></script>
     </head>
     <body>
-
         <h1 class="h1Else">Nová kniha</h1>
         </br> </br> </br> </br>
         <h2 class="h2Else" style="left:17.5%">Název knihy</h2>
         <h2 class="h2Else" style="right:35%">Rok vydání</h2>
         <h2 class="h2Else" style="right:25%">Žánr</h2>
         </br>
-        <input id="nazev" type="text" style="width:40%; position:absolute; left:5%; top:40%;  font-size:18px">
-        <input id="rok" type="number" min="0" max="2100" step="1" value="2016" style="position:absolute; top:40%; left:55%;  font-size:18px" >
-        <select id="zanr" style="position:absolute; top:40%; right:24%; font-size:18px">
+        <input class="input" id="titleInput" type="text" style="width:40%; left:5%; top:40%;">
+        <input class="input" id="publicationYearInput" type="number" min="0" max="2100" step="1" value="2016" style="top:40%; left:55%;" >
+        <select class="input" id="genreInput" style="top:40%; right:24%;">
             <option value="drama">Drama</option>
             <option value="roman">Román</option>
             <option value="novela">Novela</option>
             <option value="poezie">Poezie</option>
             <option value="proza">Próza</option>
         </select>
-        <button class="buttonElse" style="position:absolute; top:35%; right:5%" onclick="nacteni()">Zaevidovat</button>
-        <p id="odst" class="p"></p>
-        <a href="main.html" class="buttonElse" style="left:40%; top:80%"><Strong>Hlavní stánka</Strong></a>
-
-
-
-
-        
+        <button class="buttonElse" style="top:35%; right:5%" onclick="newBook()">Zaevidovat</button>
+        <p id="paragraph" class="p" style="top:50%; left:20%"></p>
+        <a href="main.html" class="buttonElse" style="left:40%; top:80%"><Strong>Hlavní stánka</Strong></a> 
     </body>
 </html>
