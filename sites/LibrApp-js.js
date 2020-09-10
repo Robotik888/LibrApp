@@ -26,3 +26,16 @@ function dateFce() {
     var todayDate = new Date().toLocaleDateString();
     document.getElementById("todayDate").innerHTML = todayDate;
     }
+
+function deleteBook() {
+    var title = document.getElementById("titleInput").value;
+    //This may be useful in future
+    //var publicationYear = Number(document.getElementById("publicationYearInput").value);
+    //var genre = document.getElementById("genreInput").value;
+    if (title == "") {
+    document.getElementById("paragraph").innerHTML = "Tato kniha neexistuje, nelze ji tudíž odstranit";
+    } else {
+    document.getElementById("paragraph").innerHTML = title + " byla odstraněna z databáze";
+    // here will be code for giving information about which book should be deleted from database
+    }
+}
