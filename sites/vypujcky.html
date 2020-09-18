@@ -5,10 +5,11 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="LibrApp-styles.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="LibrApp-js.js"></script>
     </head>
-    <body>
+    <body onload="fetchBorrows()">
         <h1 class="h1Else">Výpůjčky</h1>
-        <table>
+        <table id = "borrow-table">
             <tr>
                 <th>Název vypůjčené knihy</th>
                 <th>Jméno a Příjmení</th>
@@ -17,10 +18,10 @@
 
             </tr>
             <tr>
+                <!-- <td>aaa</td>
                 <td>aaa</td>
                 <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
+                <td>aaa</td> -->
             </tr>
 
         </table>
