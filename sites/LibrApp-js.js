@@ -62,6 +62,18 @@ function pushBorrow(borrow) {
     xmlHttp.send(JSON.stringify(borrow));
 }
 
+function deleteBookFromDatabase(title) {
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            alert("Kniha byla odstraněna");
+        }
+    }
+    xmlHttp.open("POST", "http://localhost:8080/book/remove", true);
+    //xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.send(title);
+}
+
 function dateFce() {
     var todayDate = new Date().toLocaleDateString();
     document.getElementById("todayDate").innerHTML = todayDate;
@@ -72,14 +84,30 @@ function deleteBook() {
     //This may be useful in future
     //var publicationYear = Number(document.getElementById("publicationYearInput").value);
     //var genre = document.getElementById("genreInput").value;
-    if (title == "") {
+    if (title==="") {
         document.getElementById("paragraph").innerHTML = "Tato kniha neexistuje, nelze ji tudíž odstranit";
     } else {
         document.getElementById("paragraph").innerHTML = title + " byla odstraněna z databáze";
+        deleteBookFromDatabase(title);
+
         // here will be code for giving information about which book should be deleted from database
     }
 }
+//Working Fetch Names but delay causes problems in implementation of this part
 
+
+// function fetchBooksNames() {
+//     let xmlHttp = new XMLHttpRequest();
+//     xmlHttp.onreadystatechange = function () {
+//         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+//             var books = JSON.parse(xmlHttp.responseText);
+//             var booksArray = JSON.stringify(books);
+//             return booksArray;
+//         }
+//     }
+//     xmlHttp.open("GET", "http://localhost:8080/book/list/names", true);
+//     xmlHttp.send(null);
+// }
 
 function fetchBooks() {
     let xmlHttp = new XMLHttpRequest();
