@@ -7,11 +7,11 @@
         <link rel="stylesheet" href="LibrApp-styles.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body onload="dateFce()">
+    <body onload="dateFce(); FetchDelayedBorrows()">
         <h1 class="h1Else">Zpožděné výpůjčky</h1>
         <h2 class="h1Else" style="font-size: 20px;">Dnešní datum:</h2>
         <p id="todayDate" style="text-align:center; font-size: 23px;"></p>
-        <table>
+        <table id="delayedBorrowTable">
             <tr>
                 <th>Název vypůjčené knihy</th>
                 <th>Jméno a Příjmení</th>
@@ -20,10 +20,7 @@
 
             </tr>
             <tr>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
-                <td>aaa</td>
+
             </tr>
 
         </table>
