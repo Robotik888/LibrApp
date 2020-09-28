@@ -5,12 +5,14 @@
         <meta charset="UTF-8">
         <script src="LibrApp-js.js"></script>
         <link rel="stylesheet" href="LibrApp-styles.css">
+        <link rel="icon" href="icon.png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body onload="dateFce(); FetchDelayedBorrows()">
+    <body onload="FetchDelayedBorrows()">
         <h1 class="h1Else">Zpožděné výpůjčky</h1>
         <h2 class="h1Else" style="font-size: 20px;">Dnešní datum:</h2>
         <p id="todayDate" style="text-align:center; font-size: 23px;"></p>
+        <a href="vypujcky.html" class="buttonElse" style=" left:3%; top:3%"><Strong>&lt</Strong></a>
         <table id="delayedBorrowTable">
             <tr>
                 <th>Název vypůjčené knihy</th>
@@ -24,6 +26,7 @@
             </tr>
 
         </table>
-        <a href="main.html" class="buttonElse" style=" left:41%; bottom:5%"><Strong>Hlavní stánka</Strong></a>
+        <a href="main.html" class="buttonElse" style=" left:41%; margin-top: 3%; margin-bottom: 3%;"><Strong>Hlavní stánka</Strong></a>
+        
     </body>
 </html>

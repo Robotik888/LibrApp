@@ -1,3 +1,5 @@
+//  --------------------START OF BOOK ADDING--------------------
+
 function newBook() {
     const title = document.getElementById("titleInput").value;
     const publicationYear = Number(document.getElementById("publicationYearInput").value);
@@ -27,7 +29,29 @@ function pushBook(book) {
     xmlHttp.send(JSON.stringify(book));
 }
 
-function borrow() {
+//  --------------------END OF BOOK ADDING--------------------
+
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+
+//  --------------------START OF BORROW ADDING--------------------
+
+function FetchBooksNamesForBorrowAddition() {
+    let xmlHttp2 = new XMLHttpRequest();
+    xmlHttp2.onreadystatechange = function () {
+        if (xmlHttp2.readyState === 4 && xmlHttp2.status === 200) {
+            Borrow(JSON.parse(xmlHttp2.responseText));
+        }
+    }
+    xmlHttp2.open("GET", "http://localhost:8080/book/list/names", true);
+    xmlHttp2.send(null);
+}
+
+function Borrow(parsedNames) {
     const returndate = new Date().toLocaleDateString();
     const assumedReturndate = new Date().toLocaleDateString();
     const title = document.getElementById("titleInput").value;
@@ -36,10 +60,11 @@ function borrow() {
     assumedReturnDate = document.getElementById("assumedReturnDateInput").value;
     if (name == "" || returnDate == "" || assumedReturnDate == "" || title == "") {
         document.getElementById("paragraph").innerHTML = "Výpůjčku nelze provést - nevyplněná pole.";
+    } else if (!(parsedNames.includes(title))) {
+        document.getElementById("paragraph").innerHTML = "Zadaná kniha není obsažena v databázi knih, výpůjčku nelze provést.";
     } else {
         const todayDate = new Date().toLocaleDateString();
         document.getElementById("paragraph").innerHTML = todayDate + " výpůjčka " + title + " pro " + name + " vypůjčeno do " + returnDate + " předpokládané vrácení " + assumedReturnDate;
-        // here will be code for giving information about new borrow to database
         let borrow = {
             title: title,
             name: name,
@@ -62,50 +87,38 @@ function pushBorrow(borrow) {
     xmlHttp.send(JSON.stringify(borrow));
 }
 
-function deleteBookFromDatabase(title) {
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            alert("Kniha byla odstraněna");
+//  --------------------END OF BORROW ADDING--------------------
+
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+
+//  --------------------START OF BORROW DELETION--------------------
+
+function FetchBorrowsNamesForBorrowDeletion() {
+    let xmlHttp2 = new XMLHttpRequest();
+    xmlHttp2.onreadystatechange = function () {
+        if (xmlHttp2.readyState === 4 && xmlHttp2.status === 200) {
+            BorrowDeletion(JSON.parse(xmlHttp2.responseText));
         }
     }
-    xmlHttp.open("POST", "http://localhost:8080/book/remove", true);
-    //xmlHttp.setRequestHeader("Content-Type", "application/json");
-    xmlHttp.send(title);
+    xmlHttp2.open("GET", "http://localhost:8080/borrow/list/names", true);
+    xmlHttp2.send(null);
 }
 
-function dateFce() {
-    var todayDate = new Date().toLocaleDateString();
-    document.getElementById("todayDate").innerHTML = todayDate;
-}
-
-function deleteBook() {
-    var title = document.getElementById("titleInput").value;
-    //alert(fetchBooksNames()); - maybe later
-    //This may be useful in future
-    //var publicationYear = Number(document.getElementById("publicationYearInput").value);
-    //var genre = document.getElementById("genreInput").value;
-    if (title==="") {
-        document.getElementById("paragraph").innerHTML = "Tato kniha neexistuje, nelze ji tudíž odstranit";
-    } else {
-        document.getElementById("paragraph").innerHTML = title + " byla odstraněna z databáze";
-        deleteBookFromDatabase(title);
-
-        // here will be code for giving information about which book should be deleted from database
-    }
-}
-
-function deleteBorrow() {
+function BorrowDeletion(parsed) {
     let title = document.getElementById("titleInput").value;
-    if (title==="") {
+    if (!(parsed.includes(title))) {
         document.getElementById("paragraph").innerHTML = "Tato kniha není vypůjčena, nelze ji tudíž odstranit";
     } else {
         document.getElementById("paragraph").innerHTML = title + " byla odstraněna z databáze výpůjček";
         deleteBorrowFromDatabase(title);
-
-        // here will be code for giving information about which book should be deleted from database
     }
 }
+
 function deleteBorrowFromDatabase(title) {
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
@@ -116,44 +129,61 @@ function deleteBorrowFromDatabase(title) {
     xmlHttp.open("POST", "http://localhost:8080/borrow/remove", true);
     xmlHttp.send(title);
 }
-//Working Fetch Names but delay causes problems in implementation of this part
 
-// function WaitFunction(x) {
-//     let xmlHttp = new XMLHttpRequest();
-//     xmlHttp.onreadystatechange = function () {
-//         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-//             alert ("HI");
-//             books = JSON.parse(xmlHttp.responseText);
-            
-//         }
-//     xmlHttp.open("GET", "http://localhost:8080/book/list/names", true);
-//     xmlHttp.send(null);
-//     setTimeout(function(){ console.log("Waited");}, x);
-//     var booksArray = JSON.stringify(books);
-//     return booksArray;
-// }
-//}
+//  --------------------END OF BORROW DELETION--------------------
 
-// function myFunction(xmlHttp) {
-//     setTimeout(function(){ var books = JSON.parse(xmlHttp.responseText); var booksArray = JSON.stringify(books); return booksArray;}, 3000);
-    
-//   }
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
 
-// function fetchBooksNames() {
-//     let xmlHttp = new XMLHttpRequest();
-//     xmlHttp.onreadystatechange = function () {
-//         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-//             // var books = JSON.parse(xmlHttp.responseText);
-//             // var booksArray = JSON.stringify(books);
-//             // alert(booksArray);
-            
-//             return myFunction(xmlHttp);
-//         }
-        
-//     }
-//     xmlHttp.open("GET", "http://localhost:8080/book/list/names", true);
-//     xmlHttp.send(null);
-// }
+//  --------------------START OF BOOK DELETION--------------------
+
+function FetchBooksNamesForBookDeletion() {
+    let xmlHttp2 = new XMLHttpRequest();
+    xmlHttp2.onreadystatechange = function () {
+        if (xmlHttp2.readyState === 4 && xmlHttp2.status === 200) {
+            BookDeletion(JSON.parse(xmlHttp2.responseText));
+        }
+    }
+    xmlHttp2.open("GET", "http://localhost:8080/book/list/names", true);
+    xmlHttp2.send(null);
+}
+
+function BookDeletion(parsed) {
+    var title = document.getElementById("titleInput").value;
+    if (!(parsed.includes(title))) {
+        document.getElementById("paragraph").innerHTML = "Tato kniha neexistuje, nelze ji tudíž odstranit";
+    } else {
+        document.getElementById("paragraph").innerHTML = title + " byla odstraněna z databáze";
+        deleteBookFromDatabase(title);
+    }   
+}
+
+function deleteBookFromDatabase(title) {
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            alert("Kniha byla odstraněna");
+        }
+    }
+    xmlHttp.open("POST", "http://localhost:8080/book/remove", true);
+    xmlHttp.send(title);
+}
+
+
+//  --------------------END OF BOOK DELETION--------------------
+
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+
+//  --------------------START OF BOOKS TABLE FILL--------------------
 
 function fetchBooks() {
     let xmlHttp = new XMLHttpRequest();
@@ -164,17 +194,6 @@ function fetchBooks() {
     }
     xmlHttp.open("GET", "http://localhost:8080/book/list", true);
     xmlHttp.send(null);
-}
-
-function fetchBorrows() {
-    let xmlHttp2 = new XMLHttpRequest();
-    xmlHttp2.onreadystatechange = function () {
-        if (xmlHttp2.readyState === 4 && xmlHttp2.status === 200) {
-            fillBorrowsTable(JSON.parse(xmlHttp2.responseText));
-        }
-    }
-    xmlHttp2.open("GET", "http://localhost:8080/borrow/listBorrow", true);
-    xmlHttp2.send(null);
 }
 
 function fillTable(books) {
@@ -190,7 +209,27 @@ function fillTable(books) {
     }
 }
 
+//  --------------------END OF BOOKS TABLE FILL--------------------
 
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+
+//  --------------------START OF BORROWS TABLE FILL--------------------
+
+function fetchBorrows() {
+    let xmlHttp2 = new XMLHttpRequest();
+    xmlHttp2.onreadystatechange = function () {
+        if (xmlHttp2.readyState === 4 && xmlHttp2.status === 200) {
+            fillBorrowsTable(JSON.parse(xmlHttp2.responseText));
+        }
+    }
+    xmlHttp2.open("GET", "http://localhost:8080/borrow/listBorrow", true);
+    xmlHttp2.send(null);
+}
 
 function fillBorrowsTable(borrows) {
     const table = document.getElementById('borrow-table');
@@ -207,9 +246,20 @@ function fillBorrowsTable(borrows) {
     }
 }
 
+//  --------------------END OF BORROWS TABLE FILL--------------------
 
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+//  #####
+
+//  --------------------START OF DELAYED BORROWS TABLE FILL--------------------
 
 function FetchDelayedBorrows() {
+    var todayDate = new Date().toLocaleDateString();
+    document.getElementById("todayDate").innerHTML = todayDate;
     let xmlHttp2 = new XMLHttpRequest();
     xmlHttp2.onreadystatechange = function () {
         if (xmlHttp2.readyState === 4 && xmlHttp2.status === 200) {
@@ -234,3 +284,5 @@ function fillDelayedBorrowsTable(borrows) {
         cell4.innerHTML = borrow.assumedReturnDate;
     }
 }
+
+//  --------------------END OF DELAYED BORROWS TABLE FILL--------------------
