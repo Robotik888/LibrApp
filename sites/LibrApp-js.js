@@ -1,19 +1,44 @@
 //  --------------------START OF BOOK ADDING--------------------
 
-function newBook() {
+function bookAddTest() {
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            newBook(JSON.parse(xmlHttp.responseText));
+        }
+    }
+    xmlHttp.open("GET", "http://localhost:8080/book/list", true);
+    xmlHttp.send(null);
+}
+
+function newBook(parsed) {
     const title = document.getElementById("titleInput").value;
     const publicationYear = Number(document.getElementById("publicationYearInput").value);
     const genre = document.getElementById("genreInput").value;
+    let currentDate = new Date;
+    let currentYear = Number(currentDate.getFullYear());
     if (title === "") {
         document.getElementById("paragraph").innerHTML = "Tuto knihu nelze zaevidovat - nevyplněná pole.";
+    } else if(publicationYear > currentYear) {
+        document.getElementById("paragraph").innerHTML = "Tuto knihu nelze zaevidovat - špatný rok vydání.";
     } else {
-        document.getElementById("paragraph").innerHTML = title + "    " + publicationYear + "    " + genre + " zaevidovano";
         let book = {
             name: title,
             year: publicationYear,
             genre: genre
         }
-        pushBook(book);
+        for (i=0; i < parsed.length; i++) {
+            if (parsed[i].name == title) {
+                alert("Kniha pod tímto názvem je již v databázi zaevidována, přejete-li si změnit její parametry, prosím odstraňte a znovu přidejte danou knihu.");
+                document.getElementById("paragraph").innerHTML = "Knihu není možné zaevidovat - zadaná kniha jež v databázi existuje";
+                break;
+            }
+            if (i == (parsed.length-1)) {
+                document.getElementById("paragraph").innerHTML = title + "    " + publicationYear + "    " + genre + " zaevidovano";
+                pushBook(book);
+            }
+        }
+        
     }
 }
 
@@ -114,7 +139,7 @@ function BorrowDeletion(parsed) {
     if (!(parsed.includes(title))) {
         document.getElementById("paragraph").innerHTML = "Tato kniha není vypůjčena, nelze ji tudíž odstranit";
     } else {
-        document.getElementById("paragraph").innerHTML = title + " byla odstraněna z databáze výpůjček";
+        document.getElementById("paragraph").innerHTML ="Výpůjčka knihy " + title + " byla odstraněna z databáze výpůjček";
         deleteBorrowFromDatabase(title);
     }
 }
@@ -123,7 +148,7 @@ function deleteBorrowFromDatabase(title) {
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            alert("Výpůjčka byla odstraněna");
+            alert("Výpůjčka knihy " + title + " byla odstraněna");
         }
     }
     xmlHttp.open("POST", "http://localhost:8080/borrow/remove", true);
@@ -157,7 +182,7 @@ function BookDeletion(parsed) {
     if (!(parsed.includes(title))) {
         document.getElementById("paragraph").innerHTML = "Tato kniha neexistuje, nelze ji tudíž odstranit";
     } else {
-        document.getElementById("paragraph").innerHTML = title + " byla odstraněna z databáze";
+        document.getElementById("paragraph").innerHTML ="Kniha " + title + " byla odstraněna z databáze";
         deleteBookFromDatabase(title);
     }   
 }
@@ -166,7 +191,7 @@ function deleteBookFromDatabase(title) {
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            alert("Kniha byla odstraněna");
+            alert("Kniha " + title + " byla odstraněna");
         }
     }
     xmlHttp.open("POST", "http://localhost:8080/book/remove", true);
