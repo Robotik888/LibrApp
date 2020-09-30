@@ -17,7 +17,7 @@ function newBook(parsed) {
     const genre = document.getElementById("genreInput").value;
     let currentDate = new Date;
     let currentYear = Number(currentDate.getFullYear());
-    if (title === "") {
+    if (title === "" || publicationYear === 0) {
         document.getElementById("paragraph").innerHTML = "Tuto knihu nelze zaevidovat - nevyplněná pole.";
     } else if(publicationYear > currentYear) {
         document.getElementById("paragraph").innerHTML = "Tuto knihu nelze zaevidovat - špatný rok vydání.";
@@ -27,17 +27,21 @@ function newBook(parsed) {
             year: publicationYear,
             genre: genre
         }
-        for (i=0; i < parsed.length; i++) {
-            if (parsed[i].name == title) {
-                alert("Kniha pod tímto názvem je již v databázi zaevidována, přejete-li si změnit její parametry, prosím odstraňte a znovu přidejte danou knihu.");
-                document.getElementById("paragraph").innerHTML = "Knihu není možné zaevidovat - zadaná kniha jež v databázi existuje";
-                break;
+        if (parsed.length === 0) {
+            pushBook(book);
+        } else {
+            for (i=0; i < parsed.length; i++) {
+                if (parsed[i].name == title) {
+                    alert("Kniha pod tímto názvem je již v databázi zaevidována, přejete-li si změnit její parametry, prosím odstraňte a znovu přidejte danou knihu.");
+                    document.getElementById("paragraph").innerHTML = "Knihu není možné zaevidovat - zadaná kniha jež v databázi existuje";
+                    break;
+                }
+                if (i == (parsed.length-1)) {
+                    document.getElementById("paragraph").innerHTML = title + "    " + publicationYear + "    " + genre + " zaevidovano";
+                    pushBook(book);
+                }
             }
-            if (i == (parsed.length-1)) {
-                document.getElementById("paragraph").innerHTML = title + "    " + publicationYear + "    " + genre + " zaevidovano";
-                pushBook(book);
-            }
-        }
+    }
         
     }
 }
